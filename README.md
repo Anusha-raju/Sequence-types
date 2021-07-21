@@ -63,18 +63,18 @@ import math
 
 class Polygon:
     """
-    This is a class which generates a regular strict convex polygon with desired vertex 	and circumradius
+    This is a class which generates a regular strict convex polygon with desired vertex and circumradius
     """
 
     def __init__(self,no_of_edges:int,circumradius:float)->None:
         """
-        This is a constructor which initialises the number of edges/vertices and       			circumradius
+        This is a constructor which initialises the number of edges/vertices and circumradius
         """
-        
         if no_of_edges<3:
-            raise ValueError("Number of edges/vertices should be equal to or greater than 								3(Three)")
+            raise ValueError("Number of edges/vertices should be equal to or greater than 3(Three)")
 
-        self.no_of_edges = no_of_edges
+        self.count_vertices = no_of_edges
+        self.count_edges = no_of_edges
         self.circumradius = circumradius
 
 
@@ -82,7 +82,7 @@ class Polygon:
         """
         This is a representation function
         """
-        return f'This is a polygon of {self.no_of_edges} edges with circumradius: 																		{self.circumradius}'
+        return f'Polygon(n={self.count_vertices}, R={self.circumradius})'
 
     @property
     def interior_angle(self)->float:
@@ -90,7 +90,7 @@ class Polygon:
         This is a function which calculates the interior angle
         """
 
-        return (self.no_of_edges - 2)*(180/self.no_of_edges)
+        return (self.count_vertices - 2)*(180/self.count_vertices)
 
     @property
     def edge_length(self)->float:
@@ -98,7 +98,7 @@ class Polygon:
         This is a function which calculates the edge length of the polygon
         """
 
-        return (2*self.circumradius)*math.sin(math.pi/self.no_of_edges)
+        return (2*self.circumradius)*math.sin(math.pi/self.count_vertices)
 
     @property
     def apothem(self)->float:
@@ -106,7 +106,7 @@ class Polygon:
         This is a function which calculates the apothem of the polygon
         """
 
-        return self.circumradius*math.cos(math.pi/self.no_of_edges)
+        return self.circumradius*math.cos(math.pi/self.count_vertices)
 
     @property
     def area(self)->float:
@@ -115,7 +115,7 @@ class Polygon:
 
         """
 
-        return 0.5*self.no_of_edges*self.apothem*self.edge_length
+        return 0.5*self.count_vertices*self.apothem*self.edge_length
 
     @property
     def perimeter(self)->float:
@@ -123,26 +123,26 @@ class Polygon:
         This is a function which calculates the perimeter of the polygon
 
         """
-        return self.no_of_edges*self.edge_length
+        return self.count_vertices*self.edge_length
 
     def __eq__(self, other:'Polygon class')->bool:
         """
-        This is a equal to (==) function which checks for the number of edges and 				circumradius
+        This is a equal to (==) function which checks for the number of edges and circumradius
         """
 
         if isinstance(other, Polygon):
-            return True if self.no_of_edges==other.no_of_edges and self.circumradius == 					other.circumradius else False
+            return True if self.count_vertices==other.count_vertices and self.circumradius == other.circumradius else False
         else:
-            raise TypeError("This operation can be performed only with two polygon type 																			objects")
+            raise TypeError("This operation can be performed only with two polygon type objects")
 
     def __gt__(self, other:'Polygon class')->bool:
         """
         This is a greater than function which calculates based on number of edges.
         """
         if isinstance(other, Polygon):
-            return True if self.no_of_edges > other.no_of_edges else False
+            return True if self.count_vertices > other.count_vertices else False
         else:
-            raise TypeError("This operation can be performed only with two polygon type 																			objects")
+            raise TypeError("This operation can be performed only with two polygon type objects")
 ```
 
 
